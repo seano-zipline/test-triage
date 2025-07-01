@@ -1,0 +1,19 @@
+<h1>CircleCI Test Failure Analyzer</h1>
+
+<%= turbo_frame_tag "results" do %>
+  <%= form_with url: failures_path, method: :post, data: { turbo_frame: "results" } do |form| %>
+    <div class="mb-3">
+      <%= form.label :circleci_url, "CircleCI Build URL" %>
+      <%= form.text_field :circleci_url, class: "form-control", placeholder: "https://app.circleci.com/pipelines/github/org/repo/12345" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :circleci_token, "CircleCI API Token" %>
+      <%= form.password_field :circleci_token, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit "Analyze", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>
