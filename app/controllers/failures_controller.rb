@@ -9,10 +9,10 @@ class FailuresController < ApplicationController
 
     parsed = CircleCiUrlParser.parse(url)
 
-    # unless parsed
-    #   render turbo_stream: turbo_stream.replace("results", partial: "failures/error", locals: { message: "Invalid CircleCI URL." })
-    #   return
-    # end
+    unless parsed
+      render turbo_stream: turbo_stream.replace("results", partial: "failures/error", locals: { message: "Invalid CircleCI URL." })
+      return
+    end
 
     client = CircleCi::Client.new(token: token)
 
