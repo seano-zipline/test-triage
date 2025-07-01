@@ -4,7 +4,7 @@
   <%= form_with url: failures_path, method: :post, data: { turbo_frame: "results" } do |form| %>
     <div class="mb-3">
       <%= form.label :circleci_url, "CircleCI Build URL" %>
-      <%= form.text_field :circleci_url, class: "form-control", placeholder: "https://app.circleci.com/pipelines/github/org/repo/12345" %>
+      <%= form.text_field :circleci_url, class: "form-control", value: "https://app.circleci.com/pipelines/github/retailzipline/zipline-app/88627" %>
     </div>
 
     <div class="mb-3">

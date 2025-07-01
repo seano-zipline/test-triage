@@ -1,6 +1,6 @@
 class CircleCiUrlParser
   CIRCLECI_PIPELINE_REGEX = %r{
-    ^https://app\.circle_ci\.com/pipelines/github/
+    ^https://app\.circleci\.com/pipelines/github/
     (?<org>[^/]+)/
     (?<repo>[^/]+)/
     (?<pipeline_number>\d+)
