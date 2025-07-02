@@ -10,7 +10,8 @@ class FailuresController < ApplicationController
     parsed = CircleCiUrlParser.parse(url)
 
     unless parsed
-      render turbo_stream: turbo_stream.replace("results", partial: "failures/error", locals: { message: "Invalid CircleCI URL." })
+      render turbo_stream: turbo_stream.replace("results", partial: "failures/error",
+                                                           locals: { message: "Invalid CircleCI URL." })
       return
     end
 
@@ -22,13 +23,14 @@ class FailuresController < ApplicationController
 
     begin
       failures = client.analyze_pipeline_failure(org:, repo:, pipeline_number:)
-      pp "**** failures ****"
-      pp failures
+      prompt = PromptGenerator.new(failures: failures[:tests]).generate
 
-      result = "LLM suggests that the failure is because ur bad at writing tests lol"
+      chat = RubyLLM.chat
+      response = chat.ask(prompt)
+      suggestion = response.content
 
-      render turbo_stream: turbo_stream.replace("results", partial: "failures/result", locals: { result: result })
-    rescue => e
+      render turbo_stream: turbo_stream.replace("results", partial: "failures/result", locals: { result: suggestion })
+    rescue StandardError => e
       render turbo_stream: turbo_stream.replace("results", partial: "failures/error", locals: { message: e.message })
     end
   end
