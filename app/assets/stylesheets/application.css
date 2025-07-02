@@ -1,0 +1,12 @@
+.pretty h3 {
+    font-size: 1.25rem;
+    margin-top: 1em;
+}
+
+.pretty p {
+    margin-bottom: 1em;
+}
+
+.pretty ol {
+    margin-left: 1.5em;
+}
