@@ -5,7 +5,7 @@ class FailuresController < ApplicationController
 
   def create
     url = params[:circleci_url]
-    token = params[:circleci_token]
+    token = ENV.fetch("CIRCLE_CI_TOKEN", nil)
 
     parsed = CircleCiUrlParser.parse(url)
 
